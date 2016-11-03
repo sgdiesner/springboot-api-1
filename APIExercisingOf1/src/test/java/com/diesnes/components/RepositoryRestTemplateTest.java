@@ -1,8 +1,12 @@
 package com.diesnes.components;
 
+import static org.junit.Assert.*;
+
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
@@ -14,45 +18,38 @@ import org.springframework.web.client.RestTemplate;
 
 //http://howtodoinjava.com/spring/spring-restful/spring-restful-client-resttemplate-example/
 public class RepositoryRestTemplateTest {
-	final String uriRandom = "http://localhost:8080/teams";
-	final String uriHomeAway = "http://localhost:8080/match/{hometeam}/verses/{awayteam}";
+	final String uriAll = "http://localhost:8080/teams";
+	final String uriAddDelete = "http://localhost:8080/teams/team/{name}";
+
 	@Test
-	public void directCall() {
+	public void retrieveAll() {
 		RestTemplate restTemplate = new RestTemplate();
-		String result = restTemplate.getForObject(uriRandom, String.class);
+		List result = restTemplate.getForObject(uriAll, List.class);
 
-		System.out.println(result);
+		assertTrue(result.size() > 3);
 	}
-	
 
 	@Test
-	public void directCallWithAccessToResponseObject() {
-		   RestTemplate restTemplate = new RestTemplate();
-		     
-		    HttpHeaders headers = new HttpHeaders();
-		    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		    HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-		     
-		    ResponseEntity<String> result = restTemplate.exchange(uriRandom, HttpMethod.GET, entity, String.class);	    
-		     
-		    System.out.println(result);
-		    System.out.println(result.getStatusCodeValue());
-		    System.out.println(result.getBody());
-		    System.out.println(result.getHeaders());
-	}
-	
-	@Test
-	public void passParams(){
-	     
-	    Map<String, String> params = new HashMap<String, String>();
-	    params.put("hometeam", "cheshire");
-	    params.put("awayteam", "staffordshire");
-	     
-	    RestTemplate restTemplate = new RestTemplate();
-	    String result = restTemplate.getForObject(uriHomeAway, String.class, params);
-	     
-	    System.out.println(result);	
+	public void add() {
+		RestTemplate restTemplate = new RestTemplate();
+		List result = restTemplate.getForObject(uriAll, List.class);
+
+		int beforeSize = result.size();
+
+		String newName = "ABC" + new Random().nextInt();
 		
-		
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("name", newName);
+
+		restTemplate = new RestTemplate();
+		restTemplate.put(uriAddDelete, null, params);
+
+		result = restTemplate.getForObject(uriAll, List.class);
+
+		int afterSize = result.size();
+
+		assertEquals(beforeSize + 1, afterSize);
+
 	}
+
 }

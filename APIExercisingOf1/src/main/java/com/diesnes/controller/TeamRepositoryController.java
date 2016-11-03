@@ -35,7 +35,6 @@ public class TeamRepositoryController {
 		return repository.retrieveTeams();
 	}
 	
-
 	@RequestMapping(value = "/team/{team}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.ALL_VALUE)
 	public RepositoryResult deleteTeam(@PathVariable String team) {
 		Team t = repository.findTeam(team);
@@ -49,16 +48,15 @@ public class TeamRepositoryController {
 	}
 	
 	@RequestMapping(value = "/team/{team}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.ALL_VALUE)
-	public RepositoryResult addTeam(@PathVariable String team) {
+	public void addTeam(@PathVariable String team) {
 		Team t = repository.findTeam(team);
 		if(t!=null){
-			return new RepositoryResult("Team " + team + " already exists");
+			//return new RepositoryResult("Team " + team + " already exists");
 		}
 		
 		repository.addTeam(new TeamTemplate(team));
 		
-		
-		return new RepositoryResult("Team " + team + " created");
+		//return new RepositoryResult("Team " + team + " created");
 	}	
 	
 	
