@@ -60,7 +60,7 @@ public class TeamRepositoryListTeamsTest {
 		ResultMatcher contentJson = MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 
 		//MockMvcRequestBuilders helps building MockHttpServletRequest
-		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/t").accept(MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE );
+		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/teams").accept(MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE );
 		
 		//Body = [{"name":"Cheshire"},{"name":"Lancashire"},{"name":"Staffordshire"}]
 		this.mockMvc.perform(builder)

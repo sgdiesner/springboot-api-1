@@ -25,7 +25,7 @@ public class DuplicateTeamCreateTest {
 	final String uriAll = "http://localhost:8080/teams";
 	final String uriAddDelete = "http://localhost:8080/teams/team/{name}";
 
-	@Test
+	//@Test
 	public void addDuplicate() {
 		RestTemplate restTemplate = new RestTemplate();
 		MyTeam[] result = restTemplate.getForObject(uriAll, MyTeam[].class);

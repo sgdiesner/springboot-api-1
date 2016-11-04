@@ -21,7 +21,7 @@ public class RepositoryRestTemplateTest {
 	final String uriAll = "http://localhost:8080/teams";
 	final String uriAddDelete = "http://localhost:8080/teams/team/{name}";
 
-	@Test
+	//@Test
 	public void retrieveAll() {
 		RestTemplate restTemplate = new RestTemplate();
 		List result = restTemplate.getForObject(uriAll, List.class);
@@ -29,7 +29,7 @@ public class RepositoryRestTemplateTest {
 		assertTrue(result.size() > 3);
 	}
 
-	@Test
+	//@Test
 	public void add() {
 		RestTemplate restTemplate = new RestTemplate();
 		List result = restTemplate.getForObject(uriAll, List.class);
