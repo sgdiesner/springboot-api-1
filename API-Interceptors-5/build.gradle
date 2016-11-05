@@ -1,0 +1,42 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+
+jar {
+	baseName = 'config1'
+	version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+war{
+	archiveName = "api-test.war"
+
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile 'aopalliance:aopalliance:1.0'
+    compile 'org.aspectj:aspectjweaver:1.8.7'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	
+	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+	
+}
